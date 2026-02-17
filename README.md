@@ -2,7 +2,7 @@
 
 # MNIST Handwritten Digit Recognizer
 
-A web app where you draw digits (0-9) on a canvas and get real-time predictions from an SVM model trained on the MNIST dataset.
+Draw digits (0-9) and get real-time predictions from an SVM model trained on the MNIST dataset. Available as both a **web app** and a **desktop app**.
 
 ## Demo
 
@@ -10,35 +10,43 @@ A web app where you draw digits (0-9) on a canvas and get real-time predictions 
 2. Click **Predict**
 3. See the recognized digit
 
-## Tech Stack
+## Versions
 
-- **Backend**: Flask, scikit-learn (SVM with RBF kernel), scipy
-- **Frontend**: HTML5 Canvas, vanilla JavaScript
-- **Preprocessing**: PIL/Pillow, NumPy
-
-## How It Works
-
-1. SVM model trains on 20,000 MNIST samples at startup
-2. User draws a digit on the 280x280 canvas (white on black)
-3. The image is sent to the server as base64 PNG
-4. Preprocessing: crop → square padding → resize to 28x28 → center-of-mass alignment
-5. Model predicts the digit and returns the result
-
-## Getting Started
+### Web Version
+Flask web app with HTML5 Canvas UI.
 
 ```bash
-# Run the app (creates venv and installs dependencies automatically)
-bash run.sh
+bash web_version/run.sh
+```
+Open http://localhost:5001 in your browser.
+
+### Desktop Version
+Tkinter desktop GUI app.
+
+```bash
+bash desktop_version/run.sh
 ```
 
-Open http://localhost:5001 in your browser.
+## Tech Stack
+
+- **Model**: scikit-learn SVM (RBF kernel), trained on 20k MNIST samples
+- **Web**: Flask, HTML5 Canvas, vanilla JavaScript
+- **Desktop**: Tkinter, PIL/Pillow
+- **Preprocessing**: PIL/Pillow, NumPy, SciPy
 
 ## Project Structure
 
 ```
-├── app.py                 # Flask server + SVM model + image preprocessing
-├── templates/
-│   └── index.html         # Drawing canvas UI
-├── run.sh                 # Startup script
+├── web_version/
+│   ├── app.py             # Flask server + SVM model + preprocessing
+│   ├── templates/
+│   │   └── index.html     # Drawing canvas UI
+│   ├── run.sh             # Startup script
+│   └── CLAUDE.md
+├── desktop_version/
+│   ├── app.py             # Tkinter GUI + SVM model + preprocessing
+│   ├── run.sh             # Startup script
+│   └── CLAUDE.md
+├── CLAUDE.md
 └── README.md
 ```
